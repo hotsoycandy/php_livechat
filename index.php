@@ -10,6 +10,7 @@
         #wrap{text-align:center;}
         #list{width:300px; height:400px; margin: 20px auto 0; border: 1px solid black; padding:5px; overflow:auto;}
         #list li{list-style:none; text-align:left; background-color: yellow; margin-bottom:10px; word-break: break-all;}
+        #text{width:200px;}
     </style>
 </head>
 <body>
@@ -69,7 +70,7 @@
                 var name = re['name'];
                 var text = re['text'];
                 final = re['wdate'];
-                $("#list").append("<li>"+name+" : "+text+"</li>");
+                $("#list").append("<li>"+name+" : "+text+"<br>"+re['wdate']+"</li>");
                 var d = $('#list');
                 d.scrollTop(d.prop("scrollHeight"));
                 show();
