@@ -7,13 +7,14 @@
     <script src='jquery-3.2.1.min.js'></script>
     <style>
         *{margin:0; padding:0; box-sizing: border-box; color:#333; font-family: sans-serif;}
-        #wrap{text-align:center; background-color: #fff; width:304px; margin: 0 auto; height:600px;}
-        #list{width:300px; height:400px; margin: 20px auto 0; border: 1px solid black; padding:5px; overflow:auto; border:none;}
-        #list li{list-style:none; text-align:left; background-color: yellow; margin-bottom:10px; word-break: break-all;}
+        #wrap{text-align:center; background-color: #fff; width:304px; margin: 40px auto; height:550px; border: 6px solid #FF9800; box-sizing: content-box; padding:5px;}
+        #list{width:300px; height:400px; margin: 20px auto 0; border: 1px solid black; padding:5px; overflow:auto; border:none; margin-bottom:5px;}
+        #list li{list-style:none; text-align:left; background-color: #FFF176; margin-bottom:10px; word-break: break-all; white-space:pre-line;}
+        #list span{font-size:14px;}
         #text{width:240px; height:50px;}
-        #send{height:50px;}
+        #send{width:45px; height:50px; border:none; background-color: #FF9800; color:white;}
         #user{float:left; text-align: left; margin-left:5px;}
-        #con{float:right; text-align:left; margin-right:5px;}
+        #con{float:right; text-align:left; margin-right:5px; height:70px; overflow:auto;}
         #con li{list-style:none;}
         body{ background: url("bgi.jpeg") no-repeat center center fixed; background-size: cover; width:100%; height:100%;}
     </style>
@@ -24,7 +25,7 @@
         <ul id="list">
         </ul>
         <input type="text" name="text" id="text">
-        <button id="send" type="submit">보내기</button>
+        <button id="send" type="submit">SEND</button>
         <div id="user">
             <div class="name"></div>
             <input type="checkbox" id="ringc" checked="checked"> 카톡알람<br>
@@ -78,14 +79,18 @@
     var list = $('#list');
     function show(){
         $.ajax({
-            url : "show.php?final="+final,
+            url : "show.php",
+            data : {
+                "final" : final,
+            },
+            type : "post",
             dataType : "json",
             success : function(re){
                 console.log('불러오기 성공');
                 var name = re['name'];
                 var text = re['text'];
                 final = re['wdate'];
-                $(list).append("<li>"+name+" : "+text+"<br>"+re['wdate']+"</li>");
+                $(list).append("<li>"+name+" : "+text+"<br><span>"+re['wdate']+"</span></li>");
                 list.scrollTop(list.prop("scrollHeight"));
                 ring();
             },

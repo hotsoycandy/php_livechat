@@ -1,7 +1,11 @@
 <?php
     include("dbcon.php");
-    $text = $_POST['text'];
-    $name = $_POST['name'];
+    if(isset($_POST['text'])&&isset($_POST['name'])){
+        $text = $_POST['text'];
+        $name = $_POST['name'];
+    }else{
+        exit("<script>alert('비정상접근'); location.replace('index.php');</script>");
+    }
     $text = str_replace("<","&#60",$text);
     $text = str_replace(">","&#62",$text);
     $text = str_replace("'","&#39",$text);
